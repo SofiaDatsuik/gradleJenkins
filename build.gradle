@@ -6,36 +6,56 @@ apply plugin: 'groovy'
 group 'greadleSelenuimProject'
 version '1.0-SNAPSHOT'
 
+configurations {
+    agent
+}
+
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
-//gradlePlugin {
-//    plugins {
-//        allurePlugin {
-//            id = 'io.qameta.allure'
-//            implementationClass = 'io.qameta.allure.gradle.AllurePlugin'
-//        }
-//    }}
 
-dependencies {
-    compile 'commons-io:commons-io:2.6'
-    compile 'io.qameta.allure:allure-testng:2.12.0'
-    compile 'com.opencsv:opencsv:3.8'
-    compile 'org.seleniumhq.selenium:selenium-api:2.53.1'
-    compile 'org.seleniumhq.selenium:selenium-java:2.53.1'
-    compile 'org.testng:testng:6.14.3'
-    compile 'log4j:log4j:1.2.17'
-    compile 'io.cucumber:cucumber-java:4.3.1'
-    testCompile 'info.cukes:cucumber-java:1.2.2'
-    testCompile 'info.cukes:cucumber-junit:1.2.5'
-    testCompile 'junit:junit:4.12'
-}
 test {
-    useTestNG()
+    systemProperties System.getProperties()
+    useTestNG() {
+        parallel 'methods'
+        threadCount 2
+        outputDirectory = file("$project.buildDir//testngOutput")
+        useDefaultListeners = true
+        suites 'testng.xml'
 
+    }
+
+    dependencies {
+        agent "org.aspectj:aspectjweaver:1.8.10"
+        compile "io.qameta.allure:allure-testng:2.0-BETA10"
+        compile 'commons-io:commons-io:2.6'
+        compile 'com.opencsv:opencsv:3.8'
+        compile 'org.seleniumhq.selenium:selenium-api:2.53.1'
+        compile 'org.seleniumhq.selenium:selenium-java:2.53.1'
+        compile 'org.testng:testng:6.14.3'
+        compile 'log4j:log4j:1.2.17'
+        compile 'io.cucumber:cucumber-java:4.3.1'
+        testCompile 'info.cukes:cucumber-java:1.2.2'
+        testCompile 'info.cukes:cucumber-junit:1.2.5'
+        testCompile 'junit:junit:4.12'
+    }
+//    task customTask(type: Test) {
+//        useTestNG()
+//        systemProperty "email", System.getProperty("email")
+//        systemProperty "password", System.getProperty("password")
+//    }
 }
+
+//task generateAllureReport(type: Exec) {
+//    commandLine "allure generate build/allure-reports"
+//}
+//test.finalizedBy(generateAllureReport)
+//
+//task openAllureReport(type: Exec) {
+//    commandLine "allure generate allure-results"
+//}
 
 //task showEmail {
 //    println 'Current user email' + showEmail
@@ -49,18 +69,8 @@ test {
 //    println("description applied")
 //}
 //
-//task customTask(type: Test) {
-//    useTestNG()
-//    systemProperty "email", System.getProperty("email")
-//    systemProperty "password", System.getProperty("password")
-//}
-//
-//task runDefault(type: Test) {
-//    useTestNG { suites 'testng.xml'
-//    }
-//}
-//
-////
+
+
 ////task generateXml << {
 ////    def threadNum = System.getProperty("threadCount", "2")
 ////
