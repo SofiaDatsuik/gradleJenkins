@@ -1,0 +1,96 @@
+import java.nio.file.Paths
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+group 'greadleSelenuimProject'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+//gradlePlugin {
+//    plugins {
+//        allurePlugin {
+//            id = 'io.qameta.allure'
+//            implementationClass = 'io.qameta.allure.gradle.AllurePlugin'
+//        }
+//    }}
+
+dependencies {
+    compile 'commons-io:commons-io:2.6'
+    compile 'io.qameta.allure:allure-testng:2.12.0'
+    compile 'com.opencsv:opencsv:3.8'
+    compile 'org.seleniumhq.selenium:selenium-api:2.53.1'
+    compile 'org.seleniumhq.selenium:selenium-java:2.53.1'
+    compile 'org.testng:testng:6.14.3'
+    compile 'log4j:log4j:1.2.17'
+    compile 'io.cucumber:cucumber-java:4.3.1'
+    testCompile 'info.cukes:cucumber-java:1.2.2'
+    testCompile 'info.cukes:cucumber-junit:1.2.5'
+    testCompile 'junit:junit:4.12'
+}
+test {
+    useTestNG()
+
+}
+
+//task showEmail {
+//    println 'Current user email' + showEmail
+//}
+//
+//task copy(type: Copy) {
+//    description 'Copies the resource directory to the target directory.'
+//    from 'resources'
+//    into 'target'
+//    include('**/*.xml', '**/*.properties')
+//    println("description applied")
+//}
+//
+//task customTask(type: Test) {
+//    useTestNG()
+//    systemProperty "email", System.getProperty("email")
+//    systemProperty "password", System.getProperty("password")
+//}
+//
+//task runDefault(type: Test) {
+//    useTestNG { suites 'testng.xml'
+//    }
+//}
+//
+////
+////task generateXml << {
+////    def threadNum = System.getProperty("threadCount", "2")
+////
+////    def text = file(Paths.get('src/test/resources', "testng_template.xml"))
+////            .text
+////            .replace('${thread.count}', threadNum)
+////
+////    def file = file(Paths.get('src/test/resources', "testng.xml"))
+////    file.text = text
+////
+////    print("Use " + file.text)
+////}
+////
+////task smokeTest(type: Test, dependsOn: generateXml) {
+////    useTestNG() {
+////        suites 'src/test/resources/testng.xml'
+////    }
+////}
+////task create {
+////
+////    ext {
+////        threadNum = System.getProperty("threadCount", "2")
+////    }
+////
+////    test {
+////        useTestNG() {
+////            suites('testng.xml')
+////            setParallel('methods')
+////            setThreadCount(threadNum.toInteger())
+////        }
+////    }
+//
+////}
