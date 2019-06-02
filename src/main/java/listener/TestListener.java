@@ -4,6 +4,7 @@ package listener;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -28,16 +29,17 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        makeScreenshot();
         LOG.info("Test FAILED: " + iTestResult.getName());
         if (iTestResult.getThrowable() != null) {
             iTestResult.getThrowable().printStackTrace();
         }
+        makeScreenshot(DriverManager.getWebDriver());
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
         LOG.info("Testskipped");
+        makeScreenshot(DriverManager.getWebDriver());
     }
 
     @Override
@@ -56,13 +58,14 @@ public class TestListener implements ITestListener {
     }
 
     @Attachment(value = "Page screenshot", type = "image/png")
-    private byte[] makeScreenshot() {
+    private byte[] makeScreenshot(WebDriver driver) {
         return ((TakesScreenshot) DriverManager.getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
     @Attachment(value = "Console error", type = "text/plain")
     private byte[] addConsoleError(String errorText) {
         return errorText.getBytes();
-    }}
+    }
+}
 
 

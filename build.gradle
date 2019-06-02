@@ -1,5 +1,6 @@
-apply plugin: 'java'
-
+plugins {
+    id 'java'
+}
 
 group 'greadleSelenuimProject'
 version '1.0-SNAPSHOT'
@@ -15,24 +16,22 @@ configurations {
 }
 
 ext {
-    aspectjVersion="1.8.6"
-    allureVersion="1.4.17"
+    aspectjVersion = "1.8.6"
+    allureVersion = "1.4.17"
 }
 
 dependencies {
-    compile 'commons-io:commons-io:2.6'
-    compile 'com.opencsv:opencsv:3.8'
-    compile 'org.seleniumhq.selenium:selenium-api:2.53.1'
-    compile 'org.seleniumhq.selenium:selenium-java:2.53.1'
-    compile 'org.testng:testng:6.14.3'
     compile 'log4j:log4j:1.2.17'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.8.1'
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
     compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
+    testCompile 'org.testng:testng:7.0.0-beta3'
     compile "ru.yandex.qatools.allure:allure-report-data:${allureVersion}"
     compile "ru.yandex.qatools.allure:allure-testng-adaptor:${allureVersion}"
-    agent   "org.aspectj:aspectjweaver:${aspectjVersion}"
+    agent "org.aspectj:aspectjweaver:${aspectjVersion}"
     compile group: 'ru.yandex.qatools.allure', name: 'allure-java-annotations', version: '1.5.4'
 }
+
 
 task runTests(type: JavaExec, dependsOn: 'classes') {
     main = 'org.testng.TestNG'
@@ -41,10 +40,10 @@ task runTests(type: JavaExec, dependsOn: 'classes') {
             project.sourceSets.test.compileClasspath,
             project.sourceSets.main.runtimeClasspath,
             project.sourceSets.test.runtimeClasspath)
-    args = ["-parallel",  "methods", "-threadcount", "1", "-d", "./build/test-output", "./src/test/resources/testng.xml"]
+    args = ["-parallel", "methods", "-threadcount", "1", "-d", "./build/test-output", "./src/test/resources/testng.xml"]
 }
 
-task setUpDefaultListeners(type: Test) {
+task runTestsFromJavaClass(type: Test) {
     useTestNG() {
         useDefaultListeners = true
     }
@@ -58,7 +57,3 @@ test {
     useTestNG()
     systemProperty 'allure.results.directory', 'build/allure-results'
 }
-//task testGroupOne(type: Test) {
-//    testReportDir = file("${reportsDir}/ManageGmail")
-//    testResultsDir = file("${buildDir}/test-results/ManageGmail")
-//}
