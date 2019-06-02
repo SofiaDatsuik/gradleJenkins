@@ -55,5 +55,5 @@ test.doFirst {
 
 test {
     useTestNG()
-    systemProperty 'allure.results.directory', 'build/allure-results'
+//    systemProperty 'allure.results.directory', 'build/allure-results'
 }
