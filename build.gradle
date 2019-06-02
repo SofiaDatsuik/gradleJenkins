@@ -1,7 +1,13 @@
-import java.nio.file.Paths
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    classpath "io.qameta.allure:allure-gradle:2.9.0"
+}
 
 apply plugin: 'java'
-apply plugin: 'groovy'
+apply plugin: 'io.qameta.allure'
 
 group 'greadleSelenuimProject'
 version '1.0-SNAPSHOT'
@@ -12,95 +18,90 @@ configurations {
 
 sourceCompatibility = 1.8
 
+allure {
+    version = "2.9.0"
+    autoconfigure = true
+    aspectjweaver = true
+    resultsDir = file("target/allure-results")
+    reportDir = file("target/allure-reports")
+
+}
+
 repositories {
     mavenCentral()
 }
 
-test {
-    systemProperties System.getProperties()
-    useTestNG() {
-        parallel 'methods'
-        threadCount 2
-        outputDirectory = file("$project.buildDir//testngOutput")
-        useDefaultListeners = true
-        suites 'testng.xml'
 
-    }
-
-    dependencies {
-        agent "org.aspectj:aspectjweaver:1.8.10"
-        compile "io.qameta.allure:allure-testng:2.0-BETA10"
-        compile 'commons-io:commons-io:2.6'
-        compile 'com.opencsv:opencsv:3.8'
-        compile 'org.seleniumhq.selenium:selenium-api:2.53.1'
-        compile 'org.seleniumhq.selenium:selenium-java:2.53.1'
-        compile 'org.testng:testng:6.14.3'
-        compile 'log4j:log4j:1.2.17'
-        compile 'io.cucumber:cucumber-java:4.3.1'
-        testCompile 'info.cukes:cucumber-java:1.2.2'
-        testCompile 'info.cukes:cucumber-junit:1.2.5'
-        testCompile 'junit:junit:4.12'
-    }
-//    task customTask(type: Test) {
-//        useTestNG()
-//        systemProperty "email", System.getProperty("email")
-//        systemProperty "password", System.getProperty("password")
-//    }
+dependencies {
+    compile 'commons-io:commons-io:2.6'
+    compile 'com.opencsv:opencsv:3.8'
+    compile 'org.seleniumhq.selenium:selenium-api:2.53.1'
+    compile 'org.seleniumhq.selenium:selenium-java:2.53.1'
+    compile 'org.testng:testng:6.14.3'
+    compile 'log4j:log4j:1.2.17'
 }
 
-//task generateAllureReport(type: Exec) {
-//    commandLine "allure generate build/allure-reports"
-//}
-//test.finalizedBy(generateAllureReport)
-//
-//task openAllureReport(type: Exec) {
-//    commandLine "allure generate allure-results"
-//}
-
-//task showEmail {
-//    println 'Current user email' + showEmail
-//}
-//
-//task copy(type: Copy) {
-//    description 'Copies the resource directory to the target directory.'
-//    from 'resources'
-//    into 'target'
-//    include('**/*.xml', '**/*.properties')
-//    println("description applied")
-//}
-//
+test {
+    useTestNG() {
+        useDefaultListeners = true
+        suite "src/test/resources/testng.xml"
+    }
+}
+test.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
 
 
-////task generateXml << {
-////    def threadNum = System.getProperty("threadCount", "2")
-////
-////    def text = file(Paths.get('src/test/resources', "testng_template.xml"))
-////            .text
-////            .replace('${thread.count}', threadNum)
-////
-////    def file = file(Paths.get('src/test/resources', "testng.xml"))
-////    file.text = text
-////
-////    print("Use " + file.text)
-////}
-////
-////task smokeTest(type: Test, dependsOn: generateXml) {
-////    useTestNG() {
-////        suites 'src/test/resources/testng.xml'
+
+//test {
+//    systemProperties System.getProperties()
+//    useTestNG() {
+//        systemProperty 'allure.results.directory', 'build/allure-results'
+//    }
+
+////    task runTestsFromXml(type: JavaExec, dependsOn: 'classes') {
+////        main = 'org.testng.TestNG'
+////        classpath = files("./src/test/resources",
+////                project.sourceSets.main.compileClasspath,
+////                project.sourceSets.test.compileClasspath,
+////                project.sourceSets.main.runtimeClasspath,
+////                project.sourceSets.test.runtimeClasspath)
+////        args = ["-parallel", "methods", "-threadcount", "1", "-d", "./build/test-output", "./src/test/resources/testng.xml"]
 ////    }
-////}
-////task create {
-////
-////    ext {
-////        threadNum = System.getProperty("threadCount", "2")
-////    }
-////
-////    test {
-////        useTestNG() {
-////            suites('testng.xml')
-////            setParallel('methods')
-////            setThreadCount(threadNum.toInteger())
-////        }
-////    }
+
+//}
 //
+////task generateAllureReport(type: Exec) {
+////    commandLine "allure generate build/allure-reports"
 ////}
+////test.finalizedBy(generateAllureReport)
+////
+////task openAllureReport(type: Exec) {
+////    commandLine "allure generate allure-results"
+////}
+//
+////task showEmail {
+////    println 'Current user email' + showEmail
+////}
+////
+////task copy(type: Copy) {
+////    description 'Copies the resource directory to the target directory.'
+////    from 'resources'
+////    into 'target'
+////    include('**/*.xml', '**/*.properties')
+////    println("description applied")
+////}
+////
+//
+//////task generateXml << {
+//////    def threadNum = System.getProperty("threadCount", "2")
+//////
+//////    def text = file(Paths.get('src/test/resources', "testng_template.xml"))
+//////            .text
+//////            .replace('${thread.count}', threadNum)
+//////
+//////    def file = file(Paths.get('src/test/resources', "testng.xml"))
+//////    file.text = text
+//////
+//////    print("Use " + file.text)
+//////}
