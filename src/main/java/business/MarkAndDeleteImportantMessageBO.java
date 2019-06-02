@@ -1,9 +1,10 @@
 package business;
 
-import io.qameta.allure.Step;
+
 import org.apache.log4j.Logger;
 import pom.GmailHomePage;
 import pom.GmailImportantPage;
+import ru.yandex.qatools.allure.annotations.Step;
 import util.DriverManager;
 
 public class MarkAndDeleteImportantMessageBO {

@@ -1,17 +1,18 @@
 package listener;
 
-import io.qameta.allure.Attachment;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import ru.yandex.qatools.allure.annotations.Attachment;
 import util.DriverManager;
 
 public class TestListener implements ITestListener {
 
-    private static Logger LOG = Logger.getLogger(DriverManager.class.getName());
+    private static Logger LOG = Logger.getLogger(TestListener.class.getName());
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
@@ -63,3 +64,5 @@ public class TestListener implements ITestListener {
     private byte[] addConsoleError(String errorText) {
         return errorText.getBytes();
     }}
+
+

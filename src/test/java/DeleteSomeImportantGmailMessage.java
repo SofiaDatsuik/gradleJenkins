@@ -9,9 +9,7 @@ import util.readers.Message;
 import util.readers.UserData;
 
 @Listeners(TestListener.class)
-
 public class DeleteSomeImportantGmailMessage extends FunctionalTest {
-    private static Logger LOG = Logger.getLogger(DeleteSomeImportantGmailMessage.class.getName());
 
     @Test(dataProvider = "user")
     public void chooseSomeImportantMessagesAndDeleteThem(UserData userData) throws InterruptedException {
