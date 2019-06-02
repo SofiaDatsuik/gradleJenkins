@@ -1,6 +1,7 @@
 package listener;
 
 
+import io.qameta.allure.Attachment;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -8,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import ru.yandex.qatools.allure.annotations.Attachment;
 import util.DriverManager;
 
 public class TestListener implements ITestListener {

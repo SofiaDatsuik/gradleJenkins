@@ -933,3 +933,27 @@
 2019-06-02 23:14:26 INFO  DriverManager:23 - New driver instantiated
 2019-06-02 23:14:26 INFO  DriverManager:23 - New driver instantiated
 2019-06-02 23:14:28 INFO  FunctionalTest:29 - Browser closed
+2019-06-02 23:20:26 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:34 INFO  FunctionalTest:22 - Web application launched
+2019-06-02 23:20:34 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:34 INFO  TestListener:20 - Teststarted running:chooseSomeImportantMessagesAndDeleteThem at:1559506834433
+2019-06-02 23:20:34 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:34 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:34 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:34 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:34 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:34 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:34 INFO  AutorizationBO:14 - User enter emailtest3mailSelenium@gmail.com in the login text box
+2019-06-02 23:20:35 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:36 INFO  AutorizationBO:21 - Password enter passwordDriverManagerin the Password text box
+2019-06-02 23:20:36 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:44 INFO  MarkAndDeleteImportantMessageBO:48 - 3 conversation marked as important
+2019-06-02 23:20:44 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:44 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:44 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:46 INFO  MarkAndDeleteImportantMessageBO:54 - Messages was choosen
+2019-06-02 23:20:46 INFO  MarkAndDeleteImportantMessageBO:56 - Conversations are deleted
+2019-06-02 23:20:46 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:46 INFO  DriverManager:23 - New driver instantiated
+2019-06-02 23:20:46 INFO  TestListener:26 - Result successchooseSomeImportantMessagesAndDeleteThem
+2019-06-02 23:20:47 INFO  FunctionalTest:29 - Browser closed

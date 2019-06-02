@@ -1,10 +1,11 @@
 package business;
 
 
+import business.allure_logger.AllureReportLogger;
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import pom.GmailHomePage;
 import pom.GmailImportantPage;
-import ru.yandex.qatools.allure.annotations.Step;
 import util.DriverManager;
 
 public class MarkAndDeleteImportantMessageBO {
@@ -17,7 +18,7 @@ public class MarkAndDeleteImportantMessageBO {
     public void markImportantMessages() throws InterruptedException {
         gmailHomePage.markMessagesAsImportant();
         DriverManager.refreshPage();
-        LOG.info("3 conversation marked as important");
+        AllureReportLogger.debuLog("3 conversation marked as important");
     }
 
     @Step(" Click  important message button ")
@@ -28,7 +29,7 @@ public class MarkAndDeleteImportantMessageBO {
     @Step("  Delete important message")
     public void deleteImportantMessages() {
         gmailImportantPage.clickDeleteButton();
-        LOG.info("Conversations are deleted");
+        AllureReportLogger.debuLog("Conversations are deleted");
     }
 
     @Step(" Verify messagesMarkedAsImportant")
@@ -45,15 +46,15 @@ public class MarkAndDeleteImportantMessageBO {
     @Step("Choose with method chooseImportantMessages")
     public void chooseImportantMessages() throws InterruptedException {
         gmailHomePage.markMessagesAsImportant();
-        LOG.info("3 conversation marked as important");
+        AllureReportLogger.debuLog("3 conversation marked as important");
     }
 
     @Step(" Delete important message")
     public void deleteSomeImportantMessages() {
         gmailImportantPage.chooseSomeImportantMessages();
-        LOG.info("Messages was choosen");
+        AllureReportLogger.debuLog("Messages was choosen");
         gmailImportantPage.clickDeleteButton();
-        LOG.info("Conversations are deleted");
+        AllureReportLogger.debuLog("Conversations are deleted");
     }
 
 
